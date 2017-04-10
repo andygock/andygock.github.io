@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <p>The <code>UART_RXn_BUFFER_SIZE</code> and <code>UART_TXn_BUFFER_SIZE</code> symbols define the size of the circular buffers in bytes. These values <b>must be a power of 2</b>. You may need to adapt this symbols to your target and your application by adding into your compiler options: </p><pre class="fragment">-DUART_RXn_BUFFER_SIZE=nn -DUART_TXn_BUFFER_SIZE=nn
 </pre><p><code>RXn</code> and <code>TXn</code> refer to the UART number, for UART3 with 128 byte buffers, add: </p><pre class="fragment">-DUART_RX3_BUFFER_SIZE=128 -DUART_TX3_BUFFER_SIZE=128
 </pre><p>UART0 is always enabled by default, to enable the other available UARTs, add the following to your compiler's symbol options for the relevant UART (also known as USART) number. </p><pre class="fragment">-DUSART1_ENABLED -DUSART2_ENABLED -DUSART3_ENABLED
-</pre><p>To enable large buffer support (over 256 bytes, up to 2^16 bytes) use: </p><pre class="fragment">-DUSARTn_LARGE_BUFFER
+</pre><p>To enable large buffer support (over 256 bytes, up to 2^15 bytes) use: </p><pre class="fragment">-DUSARTn_LARGE_BUFFER
 </pre><p>Where n = USART number. The maximum buffer size is 32768.</p>
 <p>This library supports AVR devices with up to 4 hardware USARTs.</p>
 <h3>Compiler flags</h3>
@@ -102,9 +102,9 @@ $(document).ready(function(){initNavTree('index.html','');});
 <h2>Documentation</h2>
 <p>Doxygen based documentation can be viwed at:</p>
 <ul>
-<li>HTML: <a href="https://andygock.github.io/avr-uart/docs/html/">https://andygock.github.io/avr-uart/docs/html/</a></li>
-<li>PDF: <a href="https://andygock.github.io/avr-uart/docs/html/">https://andygock.github.io/avr-uart/docs/html/</a></li>
-<li>RTF: <a href="https://andygock.github.io/avr-uart/docs/html/">https://andygock.github.io/avr-uart/docs/html/</a></li>
+<li>HTML: <a href="https://andygock.github.io/avr-uart-documentation/html/index.html">https://andygock.github.io/avr-uart-documentation/html/index.html</a></li>
+<li>PDF: <a href="https://andygock.github.io/avr-uart-documentation/latex/refman.pdf">https://andygock.github.io/avr-uart-documentation/latex/refman.pdf</a></li>
+<li>RTF: <a href="https://andygock.github.io/avr-uart-documentation/rtf/refman.rtf">https://andygock.github.io/avr-uart-documentation/rtf/refman.rtf</a></li>
 </ul>
 <h2>Notes</h2>
 <h3>Buffer overflow behaviour</h3>
