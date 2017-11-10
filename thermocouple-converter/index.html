@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Thermocouple.js Conversion Demo</title>
+    <style>
+    </style>
+</head>
+<body>
+    <h1>Thermocouple Converter</h1>
+
+    <form>
+    
+        <p>Select thermocouple type:</p>
+        <div>
+            <input type="radio" id="typeb" name="type" value="b">
+            <label for="typeb">B</label>
+            <input type="radio" id="typee" name="type" value="e">
+            <label for="typee">E</label>
+            <input type="radio" id="typee" name="type" value="j">
+            <label for="typej">J</label>
+            <input type="radio" id="typek" name="type" value="k" checked>
+            <label for="typek">K</label>
+            <input type="radio" id="typee" name="type" value="n">
+            <label for="typen">N</label>
+            <input type="radio" id="typer" name="type" value="r">
+            <label for="typer">R</label>
+            <input type="radio" id="types" name="type" value="s">
+            <label for="types">S</label>
+            <input type="radio" id="typet" name="type" value="t">
+            <label for="typet">T</label>
+        </div>
+
+        <p>Select conversion:</p>
+        <div>
+            <input type="radio" id="mv" name="units" value="mv" checked>
+            <label for="mv">mV to &deg;C</label>
+            <input type="radio" id="degc" name="units" value="degc">
+            <label for="degc">&deg;C to mV</label>
+        </div>
+
+        <p>Input value:</p>
+        <div>
+            <input id="value" type="text" name="value" placeholder="Value to be converted">
+        </div>
+
+    </form>
+
+    <p>Conversion Result:</p>
+    <h3 id="result"></h3>
+
+    <script type="text/javascript" src="https://cdn.rawgit.com/andygock/thermocouple-converter/master/Thermocouple.js"></script>
+    <script type="text/javascript">
+
+        var result = document.querySelector('#result');
+
+        onload = function(e) {
+            convert();
+            e.preventDefault();
+        };
+
+        oninput = function (e) {
+            convert();
+            e.preventDefault();
+        };
+
+        onsubmit = function (e) {
+            convert();
+            e.preventDefault();
+        };
+
+        function convert() {
+            try {
+                var input_type = document.querySelector("input[name=type]:checked").value;
+                var input_value = parseFloat(document.querySelector("input[name=value]").value);
+                var input_units = document.querySelector("input[name=units]:checked").value;
+                var converted_result = Thermocouple.convert(
+                    input_value,
+                    {
+                        type: input_type,
+                        input: input_units
+                    }
+                );
+                result.innerHTML =
+                    parseFloat(input_value) + (input_units !== "mv" ? " &deg;C" : " mV") +
+                    "<br>" +
+                    converted_result + (input_units === "mv" ? " &deg;C" : " mV");
+
+            } catch (err) {
+                result.innerHTML = err.message;
+            }
+        }
+
+    </script>
+</body>
+</html>
