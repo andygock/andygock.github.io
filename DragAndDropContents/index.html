@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <title>Drag and drop, automatic upload</title>
+    <style>
+        textarea.hover {
+            background-color: #cfc;
+        }
+    </style>
+    <script src="DragAndDropContents.js"></script>
+</head>
+
+<body>
+    <p>Drag a text file into the textarea below.</p>
+    <div>
+        <textarea id="content1" rows="20" cols="80" value=""></textarea>
+    </div>
+
+    <script type="text/javascript">
+        var content = document.getElementById("content1");
+        DragAndDropContents.read({
+            drop: 'textarea#content1',
+            maxFileSize: 100000,
+            onError: function(msg) {
+                console.error('Error: ' + msg);
+                content.value = "Errors occured, details were printed to browser console log.";
+            },
+            classOnDragOver: 'hover',
+        }, function(result) {
+            content.value = result.content;
+        });
+    </script>
+</body>
+</html>
